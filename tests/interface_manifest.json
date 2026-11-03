@@ -1,0 +1,17 @@
+{
+  "campus.deploy": [
+    "AppModule",
+    "build_spec_from_module",
+    "configure_for_codespace",
+    "configure_for_deployment",
+    "configure_for_development",
+    "create_app",
+    "get_public_prefix",
+    "get_service_prefix",
+    "has_rule",
+    "is_codespace",
+    "register_generic_landing",
+    "register_health",
+    "register_openapi"
+  ]
+}

@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "campus-deploy"
+version = "0.1.0"
+description = "Campus deployment glue: create_app, health/landing/OpenAPI route conventions - PEP 420 namespace portion under campus/deploy"
+authors = ["Ng Jun Siang <ngjunsiang@gmail.com>"]
+readme = "README.md"
+packages = [{include = "campus", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11.0,<3.15"
+flask = "^3.0.0"
+werkzeug = "^3.0.0"
+# campus.common (env, errors, introspect, utils.url) ships in the
+# campus-common distribution. Direct-URL dep: the baked URL propagates
+# into wheel metadata, so a campus-common bump requires a rebuild here.
+campus-common = {url = "https://github.com/nyjc-computing/campus-common/releases/download/v0.3.1/campus_common-0.3.1-py3-none-any.whl"}
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.16.9"
+pyright = "^1.1.391"
+
+[tool.pyright]
+include = ["src", "tests"]
+useLibraryCodeForTypes = true
+venvPath = "."
+venv = ".venv"
+stubPath = ""
+exclude = ["**/__pycache__", ".venv"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint.isort]
+# The campus namespace spans multiple distributions (campus-common,
+# campus-model, this repo); without this, src-based first-party
+# detection classifies campus.* third-party and import blocks split
+# after every carve (nyjc-computing/campus#987).
+known-first-party = ["campus"]
+
+[tool.ruff.lint]
+select = ['E', 'W', 'F', 'I', 'B', 'C4', 'SIM']
+# Policy (mirrors the campus monorepo): ruff enforces style; humans rewrite
+# code. Autofixes are disabled repo-wide (see campus docs/STYLE-GUIDE.md).
+fixable = []
+ignore = [
+    'W291', 'W292', 'W293',  # trailing whitespace: formatting, not lint
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
