@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "campus-deploy"
-version = "0.1.1"
+version = "0.1.2"
 description = "Campus deployment glue: create_app, health/landing/OpenAPI route conventions - PEP 420 namespace portion under campus/deploy"
 authors = ["Ng Jun Siang <ngjunsiang@gmail.com>"]
 readme = "README.md"
@@ -13,7 +13,7 @@ werkzeug = "^3.0.0"
 # campus.common (env, errors, introspect, utils.url) ships in the
 # campus-common distribution. Direct-URL dep: the baked URL propagates
 # into wheel metadata, so a campus-common bump requires a rebuild here.
-campus-common = {url = "https://github.com/nyjc-computing/campus-common/releases/download/v0.4.0/campus_common-0.4.0-py3-none-any.whl"}
+campus-common = {url = "https://github.com/nyjc-computing/campus-common/releases/download/v0.5.0/campus_common-0.5.0-py3-none-any.whl"}
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.16.9"
