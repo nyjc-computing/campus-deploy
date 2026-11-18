@@ -91,13 +91,13 @@ files = [
 
 [[package]]
 name = "campus-common"
-version = "0.5.0"
+version = "0.5.1"
 description = "Campus shared kernel: env, errors, introspect, schema, utils, validation - PEP 420 namespace portion under campus/common"
 optional = false
 python-versions = ">=3.11.0,<3.15"
 groups = ["main"]
 files = [
-    {file = "campus_common-0.5.0-py3-none-any.whl", hash = "sha256:562cee1777479410c8038a9b82eff81b6be215cc747b407c21a8433745bc2f75"},
+    {file = "campus_common-0.5.1-py3-none-any.whl", hash = "sha256:caf186bc3a5a615d5f8241d00436c9542941f82ed7fe6b0270f3283ca049a9ed"},
 ]
 
 [package.dependencies]
@@ -105,7 +105,7 @@ bcrypt = ">=5.0.0,<6.0.0"
 
 [package.source]
 type = "url"
-url = "https://github.com/nyjc-computing/campus-common/releases/download/v0.5.0/campus_common-0.5.0-py3-none-any.whl"
+url = "https://github.com/nyjc-computing/campus-common/releases/download/v0.5.1/campus_common-0.5.1-py3-none-any.whl"
 
 [[package]]
 name = "click"
@@ -432,4 +432,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11.0,<3.15"
-content-hash = "28e5e1d20abba574a65fc4945a9d8e5158c6e2cca471d4baf5dc55cf08913e3b"
+content-hash = "6cce0409bbbe57d40d32134abbfd4927d3113dfaf8fdfb9445fa4c22fb594a20"
