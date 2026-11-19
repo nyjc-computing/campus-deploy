@@ -16,7 +16,7 @@ glue (nyxchange: is_codespace/configure_for_codespace) install it without
 campus-suite. It sits ABOVE the consumer layer, and its service-facing
 imports are lazy provider seams resolved from the environment:
 
-- create_app lazily imports campus.audit.middleware (tracing) and
+- create_app lazily imports the audit middleware (campus.flask_campus.audit, tracing) and
   campus.config (suite-internal SESSION_COOKIE_NAMES settings);
 - build_spec_from_module lazily imports campus.flask_campus.openapi.
 
@@ -439,10 +439,12 @@ def create_app(*appmodules: AppModule) -> flask.Flask:
     # campus.audit handles ingestion but doesn't trace its own requests
     # Controlled by AUDIT_TRACING_ENABLED environment variable (default: enabled)
     if env.DEPLOY in ('campus.auth', 'campus.api'):
-        from campus.audit import middleware
+        # The middleware lives in flask_campus since flask-campus#31 (its
+        # client ships with the SDK as campus_python.audit).
+        from campus.flask_campus.audit import init_tracing
 
         # Check if tracing is enabled (default: enabled for safety)
         if _is_tracing_enabled():
-            middleware.init_app(app)
+            init_tracing(app)
 
     return app

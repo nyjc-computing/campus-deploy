@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "campus-deploy"
-version = "0.1.3"
+version = "0.2.0"
 description = "Campus deployment glue: create_app, health/landing/OpenAPI route conventions - PEP 420 namespace portion under campus/deploy"
 authors = ["Ng Jun Siang <ngjunsiang@gmail.com>"]
 readme = "README.md"
