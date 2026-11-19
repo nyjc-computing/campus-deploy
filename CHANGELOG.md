@@ -1,4 +1,14 @@
 # Changelog
+## 0.2.0 — 2026-11-19
+
+**BREAKING (environmental):** create_app's auth/api tracing setup imports
+the middleware from its new home — `campus.flask_campus.audit.init_tracing`
+(was `campus.audit.middleware.init_app`; audit-namespace reorg,
+flask-campus#31 / campus-api-python v0.10.9). Requires flask-campus
+>= v0.2.0. Consumers: campus-suite relocks both in the same wave;
+nyxchange stays on campus-deploy v0.1.3 + flask-campus v0.1.x, which
+remain compatible.
+
 
 ## 0.1.2 — 2026-11-17
 
