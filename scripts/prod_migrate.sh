@@ -31,10 +31,20 @@
 # boot far enough to serve its own routes, ledger surgery, stamping).
 # Runbook: docs/migration-protocol.md in the campus repo.
 #
-# Requires: railway CLI logged in with an ACCOUNT token (project tokens
-# are development-scoped and cannot see production). One-time service
-# setup: deploy/migrate/README.md. Windows note: railway runs from bash
-# directly; the inline python is JSON parsing only.
+# Auth: a Railway PROJECT token scoped to the campus project works for
+# every operation here, including production (verified 2026-11-25 with
+# the prod token at campus-prod/.railway-prod-token: plan mode,
+# variable writes, redeploy trigger, log tails); an account token also
+# works. Check auth with `railway status`, not `whoami` (whoami
+# rejects project tokens). In agent/non-interactive shells, clear stale
+# ambient tokens first — a RAILWAY_API_TOKEN/RAILWAY_TOKEN already in
+# the environment overrides the file token:
+#   env -u RAILWAY_API_TOKEN \
+#     RAILWAY_TOKEN="$(tr -d ' \t\r\n' < ../campus-prod/.railway-prod-token)" \
+#     bash scripts/prod_migrate.sh plan "" 1200
+# One-time service setup: deploy/migrate/README.md. Windows note:
+# railway runs from bash directly; the inline python is JSON parsing
+# only.
 
 set -euo pipefail
 
