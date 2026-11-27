@@ -46,6 +46,17 @@ Invariants (prod-migration-ops epic campus#1172):
    | `MIGRATE_JOB_AUDIT_MONGODB_URI` | `${{audit-mongodb.MONGODB_URI}}` (optional) |
    | `MIGRATION_BACKUP_BUCKET` | the backups bucket (durable envelopes, #1170) |
 
+   > **Reference syntax gotcha (verified 2026-11-27):** the `${{<service>.<VAR>}}`
+   > form only resolves when `<service>` has no dot in its name. The
+   > 2026-11-19 service renames (`campus.auth-postgres`, `campus.auth-mongodb`,
+   > …) broke every dotted example above — Railway stores the literal
+   > reference string unresolved, so the job boots with an EMPTY URI and
+   > crash-loops (observed: a one-off dbfix job got `len==0` from
+   > `${{campus.auth-mongodb-dev.MONGODB_URI}}`; the campus.auth service
+   > itself carries a literal `mongodb://…` URI for the same reason).
+   > Paste the literal value from the source service's variables instead
+   > (they rotate only on a coordinated DB-credential rotation).
+
    Credentials-before-first-boot rules apply (#1105): wire the DB
    references before the service's first deploy; verify connectivity
    with a temporary tcp-proxy if in doubt, then delete it.
